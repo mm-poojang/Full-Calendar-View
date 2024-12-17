@@ -1,0 +1,77 @@
+<div>
+    Welcome to grid js full calander view demo
+    <full-calendar #calendarComponent [options]="calendarOptions" (eventClick)="eventClicked($event)"></full-calendar>
+</div>
+
+<p-sidebar [(visible)]="isSidePanelVisible" position="right">
+    <ng-template pTemplate="header">
+        <span class="font-semibold text-xl">{{ selectedEventTitle || 'Post Detail' }}l</span>
+    </ng-template>
+
+    <div class="relative">
+        <div>
+            <img *ngIf="selectedEventImageUrl" [src]="selectedEventImageUrl" alt="" width="100%">
+        </div>
+        <!-- <video [autoplay]="true" [muted]="true" [loop]="true" playsinline class="background-video">
+      <source src="../../../../assets/icons/AIBackground.mp4" type="video/mp4">
+    </video> -->
+        <div class="flex justify-content-between event-slide-info">
+            <!-- <div class="date-time">
+				Scheduled post for <br>
+				17 May 2024 | 12:30 PM
+			</div>
+			<div class="slide-instagram-logo p-2">
+				<i class="pi pi-instagram" style="font-size: 1.2rem"></i>
+			</div> -->
+
+            <div class="date-time">
+                Scheduled post for <br>
+                {{ selectedEventDate }} | {{ selectedEventTime }}
+            </div>
+            <div class="slide-instagram-logo p-2">
+                <i [class]="selectedPlatformIcon" style="font-size: 1.2rem"></i>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mb-3 mt-3">
+        <p-card>
+            <p class="m-0">{{ selectedEventDescription || 'No description available.' }}</p>
+        </p-card>
+    </div>
+
+    <div class="mb-3 mt-3">
+        <p-card class="performance-prediction">
+            <div class="grid mt-0">
+                <div *ngFor="let item of performance" class="col py-0">
+                    <div class="text-center p-2 inner-card">
+                        <p class="m-0 prediction-label">{{ item.label }}</p>
+                        <p class="m-0 prediction-value">{{ item.value }}</p>
+                    </div>
+                </div>
+            </div>
+        </p-card>
+    </div>
+    <div class="mt-3">
+        <p-button label="Edit Post" [outlined]="true" class="w-full"></p-button>
+    </div>
+</p-sidebar>
+
+<p-dialog [modal]="true" (onHide)="Hide($event)" [(visible)]="showPopup" [style]="{ width: '55%' }">
+    <span class="p-text-secondary block mb-5">
+        <div class="flex justify-content-center">
+            <img src="../assets/images/dialog-image.png">
+        </div>
+        <h2 class="flex justify-content-center" style="color: #04091E;">Keep in mind</h2>
+        <div class="text-center justify-content-center dialog-desc mb-5">
+            Since you've changed the date of a future post, this may affect the prediction accuracy. We recommend
+            repeating the content testing for best results. You can still choose to skip and continue.</div>
+        <p-button label="Test Again" class="connect-business w-full" (click)="onPopupDecision(true)" />
+        <p class="flex justify-content-center">
+            <button class="submit_link" (click)="onPopupDecision(false)" pButton pRipple [outlined]="true">
+                <i class="pi pi-angle-left p-2"></i>Continue without testing
+            </button>
+        </p>
+    </span>
+</p-dialog>

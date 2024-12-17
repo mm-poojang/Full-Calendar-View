@@ -1,0 +1,20 @@
+<div class="image-gallery-container grid justify-content-center align-item-center">
+    <div class="col-12 gallery-wrapper">
+        <div class="grid dir-col grid-nogutter">
+            <div class="image-row grid" *ngFor="let row of rows">
+                <div class="image-column col relative" *ngFor="let image of row">
+                    <img [src]="image.url" alt="Image" class="gallery-image" />
+                    <div class="flex justify-content-between event-slide-info">
+                        <div class="date-time">
+                            Scheduled post for <br>
+                            17 May 2024 | 12:30 PM
+                        </div>
+                        <div class="slide-edit-logo p-2">
+                            <i class="pi pi-pencil" style="font-size: 1.2rem"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
